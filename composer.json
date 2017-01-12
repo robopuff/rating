@@ -1,0 +1,17 @@
+{
+  "name": "robopuff/rating",
+  "description": "An implementation of different rating systems",
+  "required": {
+    "php": "^7.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Robopuff\\Rating\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "RatingTest\\": "test/"
+    }
+  }
+}
