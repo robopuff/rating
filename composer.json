@@ -1,7 +1,8 @@
 {
   "name": "robopuff/rating",
   "description": "An implementation of different rating systems",
-  "required": {
+  "license": "GPL-2.0",
+  "require": {
     "php": "^7.0"
   },
   "autoload": {
