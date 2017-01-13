@@ -4,15 +4,14 @@ namespace Robopuff\Rating;
 
 /**
  * Elo Rating
- * created by Arpad Elo, implemented using logistic curve
+ * created by Arpad Elo, implemented using logistic curve.
  *
  * @see https://en.wikipedia.org/wiki/Elo_rating_system
- * @package Robopuff\Rating
  */
 class Elo implements RatingInterface
 {
     const FACTOR_MASTERS = 16;
-    const FACTOR_WEAKER  = 32;
+    const FACTOR_WEAKER = 32;
 
     /**
      * @var array
@@ -30,7 +29,7 @@ class Elo implements RatingInterface
         64 => 102, 63 => 95,  62 => 87,  61 => 80,
         60 => 72,  59 => 65,  58 => 57,  57 => 50,
         56 => 43,  55 => 36,  54 => 29,  53 => 21,
-        52 => 14,  51 => 7,   50 => 0
+        52 => 14,  51 => 7,   50 => 0,
     ];
 
     /**
@@ -49,7 +48,7 @@ class Elo implements RatingInterface
     }
 
     /**
-     * Set K factor
+     * Set K factor.
      *
      * @param int $factor
      */
@@ -59,10 +58,12 @@ class Elo implements RatingInterface
     }
 
     /**
-     * Get FIDE Rating difference based on points (score divided by number of games played)
+     * Get FIDE Rating difference based on points (score divided by number of games played).
      *
      * @param $points
+     *
      * @return int|mixed
+     *
      * @throws Exception\InvalidArgumentException
      */
     public function getFIDERatingDifference($points)
@@ -85,12 +86,13 @@ class Elo implements RatingInterface
     }
 
     /**
-     * Get new ratings based on pair of ratings and result of match
+     * Get new ratings based on pair of ratings and result of match.
      *
      * @param int $ratingA
      * @param int $ratingB
-     * @param int $result -1 left won, 1 right won, 0 draw or use
-     *            RatingInterface::RESULT_WON_A, RatingInterface::RESULT_WON_B and RatingInterface::RESULT_DRAW
+     * @param int $result  -1 left won, 1 right won, 0 draw or use
+     *                     RatingInterface::RESULT_WON_A, RatingInterface::RESULT_WON_B and RatingInterface::RESULT_DRAW
+     *
      * @return array
      */
     public function ratePair($ratingA, $ratingB, $result) : array
@@ -110,21 +112,22 @@ class Elo implements RatingInterface
 
         return [
             $ratingA + ($this->factor * ($scoreA - $expectedA)),
-            $ratingB + ($this->factor * ($scoreB - $expectedB))
+            $ratingB + ($this->factor * ($scoreB - $expectedB)),
         ];
     }
 
     /**
-     * Get new ratings based on ratings array
+     * Get new ratings based on ratings array.
      *
      * @param array $ratings
+     *
      * @return array
      */
     public function rateArray(array $ratings) : array
     {
         $calcR = [];
         foreach ($ratings as $position => $rating) {
-            $calcR[$position] = pow(10, $rating/400);
+            $calcR[$position] = pow(10, $rating / 400);
         }
 
         $expected = [];
@@ -136,14 +139,7 @@ class Elo implements RatingInterface
         $results = [];
         $count = count($ratings);
         foreach ($expected as $position => $rating) {
-            if ($position === 0) {
-                $score = 1;
-            } elseif ($position === $count -1) {
-                $score = 0;
-            } else {
-                $score = ((($count-1) - $position) / ($count-1));
-            }
-
+            $score = ((($count - 1) - $position) / ($count - 1));
             $results[$position] = $ratings[$position] + ($this->factor * ($score - $rating));
         }
 
