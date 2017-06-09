@@ -2,6 +2,9 @@
 
 ## Elo
 
+[![Build Status](https://travis-ci.org/robopuff/rating.svg?branch=master)](https://travis-ci.org/robopuff/rating)
+[![Coverage Status](https://coveralls.io/repos/github/robopuff/rating/badge.svg?branch=master)](https://coveralls.io/github/robopuff/rating?branch=master)
+
 Based on Elo rating system, adapted to use over arrays
 
 ```php
