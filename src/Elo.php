@@ -62,9 +62,9 @@ class Elo implements RatingInterface
      *
      * @param $points
      *
-     * @return int|mixed
-     *
      * @throws Exception\InvalidArgumentException
+     *
+     * @return int|mixed
      */
     public function getFIDERatingDifference($points)
     {
